@@ -1,9 +1,17 @@
-<div class "flash-text">
-    <p><%= flash[:notice] %></p>
-</div>
-<p>Title: <%= @book.title %></p>
-<p>Body: <%= @book.body %></p>
+<%= flash[:notice] %>
+
+<% if @book.errors.any? %>
+    <%= @book.errors.count %>errors prohibited this book from being saved:
+    <ul>
+        <%= @book.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+        <% end %>
+    </ul>
+<% end %>
+
+<P>Title: <%= @book.title %></p>
+<P>Body: <%= @book.body %></p>
 
 <%= link_to "Edit", edit_book_path(@book.id) %>
-|
+<%= "|" %>
 <%= link_to "Back", books_path %>
